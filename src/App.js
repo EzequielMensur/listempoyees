@@ -1,25 +1,62 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import SideMenu from './components/SideMenu/SideMenu';
+import { makeStyles} from '@material-ui/core';
+import Header from './components/Header/Header';
+import { ThemeProvider } from '@mui/material';
+import Employees from './pages/Employees/Employees';
+import { createTheme } from '@material-ui/core/styles'
+
+
+
+const theme=createTheme({
+    palette:{
+      primary:{
+        main:'#333996',
+        light:'#3c44b126'
+      },
+      secundary:{
+        main:'#333996',
+        light:'#3c44b126'
+      },
+    },
+    shape:{
+      borderRadius:'12px'
+    },
+    overrides:{
+      MuiAppBar:{
+        root:{
+          transform:'translateZ(0)'
+        }
+      }
+    },
+    props:{
+      MuiIconButton:{
+         disableRipple:true
+      }
+    }
+})
+
+const useStyles =makeStyles({
+  appMain:{
+    paddingLeft:'320px',
+    width:'100%',
+    
+  }
+})
 
 function App() {
+  const classes =useStyles()
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+    <SideMenu/>
+   <div className={classes.appMain}>
+     <Header></Header>
+     <Employees/>
+   </div>
+   </ThemeProvider>
   );
+  
 }
 
 export default App;
